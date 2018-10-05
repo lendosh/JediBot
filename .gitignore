@@ -12,11 +12,16 @@
 .sts4-cache
 
 ### IntelliJ IDEA ###
-.idea
+.idea/
 *.iws
 *.iml
 *.ipr
 /out/
+
+# Gradle
+/.gradle/
+*/build/
+gradle.properties
 
 ### NetBeans ###
 /nbproject/private/
@@ -24,3 +29,8 @@
 /dist/
 /nbdist/
 /.nb-gradle/
+
+.DS_Store
+.directory
+*.log
+.env
