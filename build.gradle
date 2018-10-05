@@ -1,0 +1,72 @@
+buildscript {
+	ext {
+		springBootVersion = '2.0.5.RELEASE'
+	}
+	repositories {
+		mavenCentral()
+	}
+	dependencies {
+		classpath("org.springframework.boot:spring-boot-gradle-plugin:${springBootVersion}")
+	}
+}
+
+apply plugin: 'java'
+apply plugin: 'eclipse'
+apply plugin: 'org.springframework.boot'
+apply plugin: 'io.spring.dependency-management'
+
+group = 'com.JediMasterSpring'
+version = '0.0.1-SNAPSHOT'
+sourceCompatibility = 1.8
+
+repositories {
+	mavenCentral()
+}
+
+
+sourceCompatibility = JavaVersion.VERSION_1_8
+targetCompatibility = JavaVersion.VERSION_1_8
+
+dependencies {
+	compile("org.telegram:telegrambots-meta:3.6.1")
+	compile("com.github.unafraid.telegram-apis:InlineMenuAPI:1.0.0")
+	compile("mysql:mysql-connector-java:6.0.5")
+	compile("org.hibernate:hibernate-core:5.2.17.Final")
+	compile("org.hibernate:hibernate-envers:5.2.17.Final")
+	compile("org.hibernate:hibernate-entitymanager:5.2.17.Final")
+	compile("org.hibernate:hibernate-validator:5.2.5.Final")
+	compile("org.springframework.boot:spring-boot-starter-data-jpa")
+	compile("org.springframework.boot:spring-boot-starter-web-services")
+	compile("org.springframework.boot:spring-boot-configuration-processor")
+	compile("org.springframework.boot:spring-boot-starter-jetty")
+	compile("org.springframework.boot:spring-boot-starter-actuator")
+	compile("org.springframework.boot:spring-boot-starter-log4j2") {
+		exclude module: "log4j-api"
+		exclude module: "log4j-core"
+	}
+	compile("org.apache.logging.log4j:log4j-web:2.11.1")
+	testCompile("junit:junit")
+}
+
+configurations {
+	compile {
+		exclude module: "spring-boot-starter-logging"
+		exclude module: "spring-boot-starter-tomcat"
+	}
+}
+
+tasks.withType(JavaCompile) {
+	options.encoding = "UTF-8"
+}
+
+jar {
+	manifest {
+		attributes("Built-By": System.getProperty("user.name"),
+				"Implementation-URL": "https://github.com/lendosh/JediBot/",
+				"Main-Class": "com.JediMasterSpring.JediBot.JediBotApplication.java")
+	}
+}
+
+task wrapper(type: Wrapper) {
+	gradleVersion = "4.8"
+}
